@@ -1,22 +1,24 @@
 import React, { useState } from 'react'
 import PostItem from './PostItem'
 import useFetch from '../hooks/useFetch'
+import Loader from '../loader/Loader'
 
 const PostList = () => {
   const [filter, setFilter] = useState('')
+
   const { data: posts, loading } = useFetch(
     'http://jsonplaceholder.typicode.com/posts'
   )
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <Loader />
 
   return (
     <div>
       <h1>Post Lists</h1>
       <input
         type="text"
-        value={filter}
         onChange={e => setFilter(e.target.value)}
+        value={filter}
       />
       {posts
         .filter(
